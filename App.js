@@ -18,30 +18,6 @@ const firebaseConfig = {
 };
 
 
-import Auth from './Service/Auth';
-import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from './Redux/reducer/user';
-
-const dispatch = useDispatch();
-
-const { userData, login } = useSelector(state => state.User);
-
-const [loginChk, setloginChk] = useState(true);
-
-
-useEffect(() => {
-  getUser();
-}, []);
-
-const getUser = async () => {
-  let data = await Auth.getAccount();
-  if (data != null) {
-    dispatch(setUser(data));
-    setloginChk(false)
-  } else {
-    setloginChk(false)
-  }
-}
 
 
 
@@ -54,12 +30,10 @@ export default function App() {
       <Stack.Navigator screenOptions={{
         headerShown: false
       }}>
-        {!login ?  
-         <Stack.Screen name="SignIn"    component={SignInScreen} />:
-         <> 
-       <Stack.Screen name="UserChat" component={TabBottom} /> 
-       
-        <Stack.Screen name="Messengers" component={ItemUserChat} /> </>}
+  
+         <Stack.Screen name="SignIn"    component={SignInScreen} />
+         <Stack.Screen name="UserChat" component={TabBottom} /> 
+        <Stack.Screen name="Messengers" component={ItemUserChat} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );

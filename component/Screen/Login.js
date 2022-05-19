@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
-import { useDispatch } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import SimpleToast from 'react-native-simple-toast';
 
@@ -18,7 +17,6 @@ const SignInScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [secure, setSecure] = useState(true);
-    const dispatch = useDispatch();
 
 
     const onClickPressLogin = () => {
@@ -27,7 +25,7 @@ const SignInScreen = ({ navigation }) => {
             .then(() => {
                 navigation.navigate('UserChat');
                 dispatch(setUser(userData));
-                await Auth.setAccount(userData);
+              
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
